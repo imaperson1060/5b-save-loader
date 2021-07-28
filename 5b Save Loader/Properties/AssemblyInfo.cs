@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("5b Save Loader")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A helpful save loader for BFDIA 5b. Allows for multiple user profiles or if you just want to play deathless.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ari Meisels")]
 [assembly: AssemblyProduct("5b Save Loader")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("Ari Meisels")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible

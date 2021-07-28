@@ -32,7 +32,7 @@ namespace _5b_Save_Loader
 
             if (OpenFile.ShowDialog() == DialogResult.OK)
             {
-                FilePath = Environment.GetEnvironmentVariable("AppData") + "\\Macromedia\\Flash Player\\#SharedObjects\\VSAWG93S\\localhost\\" + OpenFile.FileName.Remove(0, 3);
+                FilePath = Directory.GetDirectories(Environment.GetEnvironmentVariable("AppData") + "\\Macromedia\\Flash Player\\#SharedObjects\\")[0] + "\\localhost\\" + OpenFile.FileName.Remove(0, 3);
 
                 if (!File.Exists(Path.Combine(FilePath, "bfdia5b.sol")))
                 {
