@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace _5b_Save_Loader.Properties
+namespace _5b_Save_Loader_2._0.Properties
 {
 
 

@@ -2,12 +2,17 @@
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Windows.Forms;
+using System.Windows;
+//using System.Windows.Shapes;
+using Microsoft.Win32;
 using Microsoft.VisualBasic;
 
-namespace _5b_Save_Loader
+namespace _5b_Save_Loader_2._0
 {
-    public partial class MainWindow : Form
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
     {
         string FilePath;
 
@@ -15,22 +20,24 @@ namespace _5b_Save_Loader
         {
             InitializeComponent();
 
-            step2.Hide();
+            Step2.Visibility = Visibility.Hidden;
             ToggleButtons(0);
         }
 
         private void SelectButton_Click(object sender, EventArgs e)
         {
-            step2.Hide();
+            Step2.Visibility = Visibility.Hidden;
             ToggleButtons(0);
 
             FilePath = null;
 
+            OpenFileDialog OpenFile = new OpenFileDialog();
+
             OpenFile.FileName = "5b.swf";
             OpenFile.Filter = "Adobe Flash movie (*.swf)|*.swf";
-            OpenFile.Title = "Upload Process (1/6)";
+            OpenFile.Title = "Select SWF";
 
-            if (OpenFile.ShowDialog() == DialogResult.OK)
+            if (OpenFile.ShowDialog() == true)
             {
                 FilePath = Directory.GetDirectories(Environment.GetEnvironmentVariable("AppData") + "\\Macromedia\\Flash Player\\#SharedObjects\\")[0] + "\\localhost\\" + OpenFile.FileName.Remove(0, 3);
 
@@ -40,7 +47,7 @@ namespace _5b_Save_Loader
                     return;
                 }
 
-                step2.Show();
+                Step2.Visibility = Visibility.Visible;
                 ToggleButtons(1);
 
                 RefreshSaves();
@@ -51,12 +58,12 @@ namespace _5b_Save_Loader
         {
             if (SavesList.SelectedIndex == -1) return;
 
-            if (MessageBox.Show("Are you sure you want to replace your current save with this one?", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Are you sure you want to replace your current save with this one?", "Are you sure?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 string[] Saves = Directory.GetDirectories(FilePath);
                 File.Copy(Path.Combine(Saves[SavesList.SelectedIndex], "bfdia5b.sol"), Path.Combine(FilePath, "bfdia5b.sol"), true);
 
-                MessageBox.Show(Saves[SavesList.SelectedIndex] + " has been set as the current save!");
+                MessageBox.Show(Path.GetFileName(Saves[SavesList.SelectedIndex]) + " has been set as the current save!");
             }
         }
 
@@ -64,9 +71,9 @@ namespace _5b_Save_Loader
         {
             MakeBackup();
 
-            SaveButton.Enabled = false;
+            SaveButton.IsEnabled = false;
             Thread.Sleep(1000);
-            SaveButton.Enabled = true;
+            SaveButton.IsEnabled = true;
 
             RefreshSaves();
         }
@@ -82,7 +89,7 @@ namespace _5b_Save_Loader
 
             if (File.Exists(Path.Combine(FilePath, Save, "bfdia5b.sol")))
             {
-                if (MessageBox.Show("A save by this name already exists. Do you want to overwrite it?", "Warning!", MessageBoxButtons.YesNo) == DialogResult.No)
+                if (MessageBox.Show("A save by this name already exists. Do you want to overwrite it?", "Warning!", MessageBoxButton.YesNo) == MessageBoxResult.No)
                 {
                     return;
                 }
@@ -103,12 +110,12 @@ namespace _5b_Save_Loader
 
             string[] Saves = Directory.GetDirectories(FilePath);
 
-            if (MessageBox.Show("Are you sure you want to PERMANENTLY delete this save?", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.No)
+            if (MessageBox.Show("Are you sure you want to PERMANENTLY delete this save?", "Are you sure?", MessageBoxButton.YesNo) == MessageBoxResult.No)
             {
                 return;
             }
 
-            MessageBox.Show(Saves[SavesList.SelectedIndex].Split('\\')[Saves[SavesList.SelectedIndex].Split('\\').Length - 1] + " has been deleted!");
+            MessageBox.Show(Path.GetFileName(Saves[SavesList.SelectedIndex]) + " has been deleted!");
 
             Directory.Delete(Path.Combine(FilePath, Saves[SavesList.SelectedIndex]), true);
 
@@ -119,18 +126,20 @@ namespace _5b_Save_Loader
 
         private void ImportButton_Click(object sender, EventArgs e)
         {
+            OpenFileDialog OpenFile = new OpenFileDialog();
+
             OpenFile.FileName = "bfdia5b.sol";
             OpenFile.Filter = "Shared Object Local Files (*.sol)|*.sol";
             OpenFile.Title = "Import Save";
 
-            if (OpenFile.ShowDialog() == DialogResult.OK)
+            if (OpenFile.ShowDialog() == true)
             {
                 var Save = Interaction.InputBox("Save File Name", "Save Game", GetTime(), 100, 100);
                 if (Save == "") return;
 
                 if (File.Exists(Path.Combine(FilePath, Save, "bfdia5b.sol")))
                 {
-                    if (MessageBox.Show("A save by this name already exists. Do you want to overwrite it?", "Warning!", MessageBoxButtons.YesNo) == DialogResult.No)
+                    if (MessageBox.Show("A save by this name already exists. Do you want to overwrite it?", "Warning!", MessageBoxButton.YesNo) == MessageBoxResult.No)
                     {
                         return;
                     }
@@ -144,9 +153,9 @@ namespace _5b_Save_Loader
 
                 File.WriteAllText(Path.Combine(FilePath, Save, "desc.txt"), "Description...");
 
-                ImportButton.Enabled = false;
+                ImportButton.IsEnabled = false;
                 Thread.Sleep(1000);
-                ImportButton.Enabled = true;
+                ImportButton.IsEnabled = true;
 
                 RefreshSaves();
             }
@@ -158,6 +167,8 @@ namespace _5b_Save_Loader
 
             string[] Saves = Directory.GetDirectories(FilePath);
 
+            SaveFileDialog SaveFile = new SaveFileDialog();
+
             SaveFile.DefaultExt = "sol";
             SaveFile.FileName = "bfdia5b.sol";
             SaveFile.Filter = "Shared Object Local Files (*.sol)|*.sol";
@@ -168,6 +179,18 @@ namespace _5b_Save_Loader
             if (SaveFile.FileName == "") return;
 
             File.Copy(Path.Combine(Saves[SavesList.SelectedIndex], "bfdia5b.sol"), SaveFile.FileName, true);
+        }
+
+        private void SavesList_SelectionChanged(object sender, EventArgs e)
+        {
+            if (SavesList.SelectedIndex == -1) return;
+
+            ToggleButtons(3);
+
+            string[] Saves = Directory.GetDirectories(FilePath);
+            var Description = File.ReadAllText(Path.Combine(Saves[SavesList.SelectedIndex], "desc.txt"));
+
+            DescriptionText.Text = File.ReadAllText(Path.Combine(Saves[SavesList.SelectedIndex], "desc.txt"));
         }
 
         private string GetTime()
@@ -193,11 +216,12 @@ namespace _5b_Save_Loader
 
             if (File.Exists(Path.Combine(FilePath, Save, "bfdia5b.sol")))
             {
-                if (MessageBox.Show("A save by this name already exists. Do you want to overwrite it?", "Warning!", MessageBoxButtons.YesNo) == DialogResult.No)
+                if (MessageBox.Show("A save by this name already exists. Do you want to overwrite it?", "Warning!", MessageBoxButton.YesNo) == MessageBoxResult.No)
                 {
                     return;
                 }
-            } else
+            }
+            else
             {
                 Directory.CreateDirectory(Path.Combine(FilePath, Save));
             }
@@ -227,18 +251,6 @@ namespace _5b_Save_Loader
             File.WriteAllText(Path.Combine(Saves[SavesList.SelectedIndex], "desc.txt"), DescriptionText.Text);
         }
 
-        private void SavesList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (SavesList.SelectedIndex == -1) return;
-
-            ToggleButtons(3);
-
-            string[] Saves = Directory.GetDirectories(FilePath);
-            var Description = File.ReadAllText(Path.Combine(Saves[SavesList.SelectedIndex], "desc.txt"));
-            
-            DescriptionText.Text = File.ReadAllText(Path.Combine(Saves[SavesList.SelectedIndex], "desc.txt"));
-        }
-
         private void RefreshSaves()
         {
             SavesList.Items.Clear();
@@ -256,46 +268,46 @@ namespace _5b_Save_Loader
         {
             if (Reason == 0) // No file chosen
             {
-                LoadButton.Hide();
-                SaveButton.Hide();
-                SavesList.Hide();
-                DescriptionText.Hide();
-                LoadButton.Hide();
-                RenameButton.Hide();
-                DeleteButton.Hide();
-                ImportButton.Hide();
-                ExportButton.Hide();
+                LoadButton.Visibility = Visibility.Hidden;
+                SaveButton.Visibility = Visibility.Hidden;
+                SavesList.Visibility = Visibility.Hidden;
+                DescriptionText.Visibility = Visibility.Hidden;
+                LoadButton.Visibility = Visibility.Hidden;
+                RenameButton.Visibility = Visibility.Hidden;
+                DeleteButton.Visibility = Visibility.Hidden;
+                ImportButton.Visibility = Visibility.Hidden;
+                ExportButton.Visibility = Visibility.Hidden;
             }
 
             if (Reason == 1) // File chosen
             {
-                LoadButton.Show();
-                SaveButton.Show();
-                SavesList.Show();
-                DescriptionText.Show();
-                LoadButton.Show();
-                RenameButton.Show();
-                DeleteButton.Show();
-                ImportButton.Show();
-                ExportButton.Show();
+                LoadButton.Visibility = Visibility.Visible;
+                SaveButton.Visibility = Visibility.Visible;
+                SavesList.Visibility = Visibility.Visible;
+                DescriptionText.Visibility = Visibility.Visible;
+                LoadButton.Visibility = Visibility.Visible;
+                RenameButton.Visibility = Visibility.Visible;
+                DeleteButton.Visibility = Visibility.Visible;
+                ImportButton.Visibility = Visibility.Visible;
+                ExportButton.Visibility = Visibility.Visible;
             }
 
             if (Reason == 2) // Nothing selected
             {
-                LoadButton.Enabled = false;
-                RenameButton.Enabled = false;
-                DeleteButton.Enabled = false;
-                ExportButton.Enabled = false;
-                DescriptionText.Enabled = false;
+                LoadButton.IsEnabled = false;
+                RenameButton.IsEnabled = false;
+                DeleteButton.IsEnabled = false;
+                ExportButton.IsEnabled = false;
+                DescriptionText.IsEnabled = false;
             }
 
             if (Reason == 3) // Something selected
             {
-                LoadButton.Enabled = true;
-                RenameButton.Enabled = true;
-                DeleteButton.Enabled = true;
-                ExportButton.Enabled = true;
-                DescriptionText.Enabled = true;
+                LoadButton.IsEnabled = true;
+                RenameButton.IsEnabled = true;
+                DeleteButton.IsEnabled = true;
+                ExportButton.IsEnabled = true;
+                DescriptionText.IsEnabled = true;
             }
         }
     }
