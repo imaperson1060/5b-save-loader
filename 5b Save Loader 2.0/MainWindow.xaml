@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_5b_Save_Loader_2._0"
         mc:Ignorable="d"
+        ResizeMode="CanMinimize"
         Title="5b Save Loader" Height="390" Width="458">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -18,7 +19,7 @@
             </LinearGradientBrush>
         </Grid.Background>
 
-        <TextBlock x:Name="TitleText" HorizontalAlignment="Left" Height="48" TextWrapping="Wrap" Text="5b Save Loader" VerticalAlignment="Top" Width="422" FontSize="36" FontFamily="Arial" Padding="0" Margin="10,10,0,0" Grid.ColumnSpan="2">
+        <TextBlock x:Name="TitleText" HorizontalAlignment="Left" Height="48" TextWrapping="Wrap" Text="  5b Save Loader" VerticalAlignment="Top" Width="452" FontSize="36" FontFamily="Arial" Padding="0" Margin="0,10,0,0" Grid.ColumnSpan="2">
             <TextBlock.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFDFB611" Offset="1"/>
@@ -28,9 +29,9 @@
             </TextBlock.Background>
         </TextBlock>
 
-        <TextBlock x:Name="CreatorName" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="292,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" TextAlignment="Center" Height="48" Width="93"><Run Text="By"/><LineBreak/><Run Text="imaperson"/></TextBlock>
+        <TextBlock x:Name="CreatorName" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="289,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" TextAlignment="Center" Height="48" Width="93"><Run Text="By"/><LineBreak/><Run Text="imaperson"/></TextBlock>
 
-        <Image x:Name="CreatorImage" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="36" Margin="392,18,0,0" VerticalAlignment="Top" Width="36" Source="skin512.png"/>
+        <Image x:Name="CreatorImage" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="36" Margin="389,18,0,0" VerticalAlignment="Top" Width="36" Source="skin512.png"/>
 
         <TextBlock x:Name="Step1"  Grid.Column="1" HorizontalAlignment="Left" Margin="12,83,0,0" TextWrapping="Wrap" Text="Step 1:" VerticalAlignment="Top" Height="16" Width="45"/>
 
@@ -57,6 +58,15 @@
         </Button>
 
         <Button x:Name="SaveButton" Grid.ColumnSpan="2" Content="Save Backup" HorizontalAlignment="Left" Margin="149,117,0,0" VerticalAlignment="Top" Width="75" Click="SaveButton_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFC7AE12" Offset="1"/>
+                    <GradientStop Color="#FFD8BE15"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        
+        <Button x:Name="OpenButton" Grid.ColumnSpan="2" Content="Open 5b" HorizontalAlignment="Left" Margin="236,117,0,0" VerticalAlignment="Top" Width="75" Click="OpenButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFC7AE12" Offset="1"/>
@@ -99,7 +109,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        
+
         <TextBox x:Name="DescriptionText" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="68" Margin="296,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136" TextChanged="DescriptionText_TextChanged"/>
     </Grid>
 </Window>

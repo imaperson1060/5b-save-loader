@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
-//using System.Windows.Shapes;
 using Microsoft.Win32;
 using Microsoft.VisualBasic;
 
@@ -15,18 +15,19 @@ namespace _5b_Save_Loader_2._0
     public partial class MainWindow : Window
     {
         string FilePath;
+        string SWFPath;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            Step2.Visibility = Visibility.Hidden;
             ToggleButtons(0);
         }
 
         private void SelectButton_Click(object sender, EventArgs e)
         {
-            Step2.Visibility = Visibility.Hidden;
+            SWFName.Text = "";
+
             ToggleButtons(0);
 
             FilePath = null;
@@ -39,7 +40,8 @@ namespace _5b_Save_Loader_2._0
 
             if (OpenFile.ShowDialog() == true)
             {
-                FilePath = Directory.GetDirectories(Environment.GetEnvironmentVariable("AppData") + "\\Macromedia\\Flash Player\\#SharedObjects\\")[0] + "\\localhost\\" + OpenFile.FileName.Remove(0, 3);
+                FilePath = Directory.GetDirectories(Environment.GetEnvironmentVariable("AppData") + @"\Macromedia\Flash Player\#SharedObjects\")[0] + @"\localhost\" + OpenFile.FileName.Remove(0, 3);
+                SWFPath = OpenFile.FileName;
 
                 if (!File.Exists(Path.Combine(FilePath, "bfdia5b.sol")))
                 {
@@ -47,7 +49,8 @@ namespace _5b_Save_Loader_2._0
                     return;
                 }
 
-                Step2.Visibility = Visibility.Visible;
+                SWFName.Text = Path.GetFileName(FilePath);
+
                 ToggleButtons(1);
 
                 RefreshSaves();
@@ -76,6 +79,11 @@ namespace _5b_Save_Loader_2._0
             SaveButton.IsEnabled = true;
 
             RefreshSaves();
+        }
+
+        private void OpenButton_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(SWFPath);
         }
 
         private void RenameButton_Click(object sender, EventArgs e)
@@ -268,8 +276,10 @@ namespace _5b_Save_Loader_2._0
         {
             if (Reason == 0) // No file chosen
             {
+                Step2.Visibility = Visibility.Hidden;
                 LoadButton.Visibility = Visibility.Hidden;
                 SaveButton.Visibility = Visibility.Hidden;
+                OpenButton.Visibility = Visibility.Hidden;
                 SavesList.Visibility = Visibility.Hidden;
                 DescriptionText.Visibility = Visibility.Hidden;
                 LoadButton.Visibility = Visibility.Hidden;
@@ -281,8 +291,10 @@ namespace _5b_Save_Loader_2._0
 
             if (Reason == 1) // File chosen
             {
+                Step2.Visibility = Visibility.Visible;
                 LoadButton.Visibility = Visibility.Visible;
                 SaveButton.Visibility = Visibility.Visible;
+                OpenButton.Visibility = Visibility.Visible;
                 SavesList.Visibility = Visibility.Visible;
                 DescriptionText.Visibility = Visibility.Visible;
                 LoadButton.Visibility = Visibility.Visible;

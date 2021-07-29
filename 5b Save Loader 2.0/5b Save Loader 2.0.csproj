@@ -99,9 +99,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="skin512.png" />
   </ItemGroup>
   <ItemGroup>
