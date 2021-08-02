@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace _5b_Save_Loader_2._0
+namespace _5b_Save_Loader_3._0
 {
     /// <summary>
     /// Interaction logic for App.xaml

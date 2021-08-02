@@ -1,0 +1,39 @@
+﻿<Window x:Class="_5b_Save_Loader_3._0.StatsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_5b_Save_Loader_3._0"
+        mc:Ignorable="d"
+        ResizeMode="CanMinimize"
+        Title="StatsWindow" Height="450" Width="800">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF979797" Offset="0"/>
+            <GradientStop Color="White" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid>
+        <Image x:Name="ContinueButton" Source="images/upto.png" Margin="10,57,663,331" MouseEnter="ContinueButton_MouseEnter"></Image>
+        <Image x:Name="ContinueShadow" Margin="10,57,667,331" MouseLeave="ContinueButton_MouseLeave" MouseUp="ContinueButton_MouseUp" MouseDown="ContinueButton_Click" Opacity="0.85"></Image>
+        <TextBlock x:Name="UpToText" HorizontalAlignment="Left" Margin="10,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="113"/>
+
+        <Image Source="images/leg.png" Margin="207,55,565,344"></Image>
+        <Image Source="images/leg.png" Margin="219,55,553,344"></Image>
+        <Image Source="images/book_death.png" Margin="193,26,544,351"/>
+        <Image Source="images/spike.png" Margin="201,48,553,333"/>
+        <TextBlock x:Name="DeathCount" HorizontalAlignment="Left" Margin="199,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113"/>
+
+        <Image Source="images/timer.png" Margin="360,33,371,327"/>
+        <TextBlock x:Name="Timer" HorizontalAlignment="Left" Margin="370,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="20"/>
+
+        <Image x:Name="WinToken" gif:ImageBehavior.AnimatedSource="images/win_token_hover.gif" gif:ImageBehavior.AnimationCompleted="WinToken_AnimationCompleted" Margin="578,45,164,325" MouseEnter="WinToken_MouseEnter"/>
+        <TextBlock x:Name="WinTokensTotal" HorizontalAlignment="Left" Margin="581,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
+
+        <ScrollViewer Margin="582,135,20,22">
+            <TextBlock x:Name="WinTokensIndividual" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="254" Width="182"/>
+        </ScrollViewer>
+        <TextBlock HorizontalAlignment="Left" Margin="581,114,0,0" TextWrapping="Wrap" Text="Win Tokens (individual):" VerticalAlignment="Top" Width="143"/>
+    </Grid>
+</Window>

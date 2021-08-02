@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{78CFB37E-7A66-453E-883D-92B9FA8139F3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>_5b_Save_Loader_2._0</RootNamespace>
-    <AssemblyName>5b Save Loader 2.0</AssemblyName>
+    <RootNamespace>_5b_Save_Loader_3._0</RootNamespace>
+    <AssemblyName>5b Save Loader 3.0</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -53,12 +53,18 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WpfAnimatedGif, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9e7cd3b544a090dc, processorArchitecture=MSIL">
+      <HintPath>..\packages\WpfAnimatedGif.2.0.0\lib\net40\WpfAnimatedGif.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="StatsWindow.xaml.cs">
+      <DependentUpon>StatsWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -71,6 +77,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="StatsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -90,6 +100,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -99,10 +110,32 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="skin512.png" />
+    <Resource Include="images\skin512.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icon.ico" />
+    <Resource Include="images\win_token_hover.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\win_token_get.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\book_death.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\spike.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\leg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\upto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\btn_hover.png" />
+    <Resource Include="images\btn_click.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\timer.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
