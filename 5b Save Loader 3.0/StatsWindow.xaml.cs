@@ -16,6 +16,9 @@ namespace _5b_Save_Loader_3._0
         public string FilePath;
         public string SWFPath;
         public int Selected;
+        public int WT;
+        public int WTNew;
+        public bool WTAdd = false;
 
 
         public StatsWindow()
@@ -25,12 +28,19 @@ namespace _5b_Save_Loader_3._0
 
         private void WinToken_MouseEnter(object sender, RoutedEventArgs e)
         {
-            var WTGet = new BitmapImage();
-            WTGet.BeginInit();
-            WTGet.UriSource = new Uri(@"images/win_token_get.gif", UriKind.Relative);
-            WTGet.EndInit();
-            ImageBehavior.SetAnimatedSource(WinToken, WTGet);
-            ImageBehavior.SetRepeatBehavior(WinToken, new System.Windows.Media.Animation.RepeatBehavior(1));
+            if (!WTAdd)
+            {
+                var WTGet = new BitmapImage();
+                WTGet.BeginInit();
+                WTGet.UriSource = new Uri(@"images/win_token_get.gif", UriKind.Relative);
+                WTGet.EndInit();
+                ImageBehavior.SetAnimatedSource(WinToken, WTGet);
+                ImageBehavior.SetRepeatBehavior(WinToken, new System.Windows.Media.Animation.RepeatBehavior(1));
+
+                WTNew++;
+                WinTokensTotal.Text = "Got " + WTNew + " Win Tokens (total)";
+                WTAdd = true;
+            }
         }
 
         private void WinToken_AnimationCompleted(object sender, RoutedEventArgs e)
@@ -44,6 +54,13 @@ namespace _5b_Save_Loader_3._0
                 ImageBehavior.SetAnimatedSource(WinToken, WTHover);
                 ImageBehavior.SetRepeatBehavior(WinToken, new System.Windows.Media.Animation.RepeatBehavior(0));
             }
+        }
+
+        private void WTText_Click(object sender, RoutedEventArgs e)
+        {
+            WTNew = WT;
+            WinTokensTotal.Text = "Got " + WT + " Win Tokens (total)";
+            WTAdd = false;
         }
 
         private void ContinueButton_MouseEnter(object sender, RoutedEventArgs e)

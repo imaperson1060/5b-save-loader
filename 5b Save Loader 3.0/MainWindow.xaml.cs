@@ -223,6 +223,8 @@ namespace _5b_Save_Loader_3._0
 
             Stats.WinTokensTotal.Text += "Got " + so.Get("coins").int_val + " Win Tokens (total)";
 
+            Stats.WT = Stats.WTNew = so.Get("coins").int_val;
+
             for (var i = 0; i < so.Get("gotCoin").array_val.Length; i++)
             {
                 Stats.WinTokensIndividual.Text += "Level " + (i + 1) + ": " + so.Get("gotCoin").array_val[i] + "\n";
