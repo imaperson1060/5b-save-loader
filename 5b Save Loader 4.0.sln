@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5b Save Loader 3.0", "5b Save Loader 3.0\5b Save Loader 3.0.csproj", "{78CFB37E-7A66-453E-883D-92B9FA8139F3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5b Save Loader 4.0", "5b Save Loader 4.0\5b Save Loader 4.0.csproj", "{78CFB37E-7A66-453E-883D-92B9FA8139F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

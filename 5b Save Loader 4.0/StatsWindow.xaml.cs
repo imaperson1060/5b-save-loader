@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using WpfAnimatedGif;
 
-namespace _5b_Save_Loader_3._0
+namespace _5b_Save_Loader_4._0
 {
     /// <summary>
     /// Interaction logic for StatsWindow.xaml
