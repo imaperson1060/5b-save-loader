@@ -268,7 +268,7 @@ namespace _5b_Save_Loader_4._0
                 }
             }
 
-            Stats.WinTokensIndividual.Height = 16 * 133;
+            Stats.WinTokensIndividual.Height = 16 * so.Get("gotCoin").array_val.Length;
         }
 
         private void OpenButton_Click(object sender, RoutedEventArgs e)
